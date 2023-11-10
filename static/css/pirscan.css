@@ -1,0 +1,77 @@
+.tooltip_p {
+    position: absolute;
+    background-color: GhostWhite;
+    border: 1px solid #292222;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none; /*讓鼠標持續顯示*/
+  }
+#b{
+    background-color:skyblue;
+    font-family: monospace;
+}
+
+#g{
+    background-color: rgb(109, 221, 109);
+    font-family: monospace;
+}
+
+#L{
+    font-size: 15pt;
+    color: red;
+    font-family: monospace;
+}
+
+span .y{
+    background-color: yellow; /*Add your desired color*/
+    font-family: monospace;
+  }
+
+mark{
+    background-color: yellow; /*Add your desired color*/
+}
+.pairing-sequence{
+    text-align: left;
+    font-family: monospace;
+}
+span{
+    font-family: monospace;
+}
+
+/*for loading Container & Spinners*/
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears on top of other elements */
+}
+.loading-spinner {
+    
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    border-top: 20px solid white; /* Adjust the color to your liking */
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's above other elements */
+    display: none; /* Initially hidden */
+}
+.loading-time {
+    margin-top: 10px;
+}
+  
+  
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

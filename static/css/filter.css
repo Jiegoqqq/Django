@@ -1,0 +1,52 @@
+#b{
+    background-color:skyblue;
+    font-family: monospace;
+}
+
+#g{
+    background-color: rgb(109, 221, 109);
+    font-family: monospace;
+}
+#y{
+    font-size: 12pt;
+    background-color: yellow !important;
+    font-family: monospace !important;
+}
+
+#L{
+    font-size: 15pt;
+    color: red;
+    font-family: monospace;
+}
+
+span .y{
+    /* background-color: yellow;  */
+    font-family: monospace;
+  }
+
+mark{
+    background-color: yellow; /*Add your desired color*/
+}
+.pairing-sequence{
+    text-align: left;
+    font-family: monospace;
+}
+span{
+    font-family: monospace;
+}
+.GU {
+    background-color: rgb(108, 157, 255);
+    color: black;
+}
+.NGU {
+    background-color: rgb(253, 253, 83);
+    color: black;
+}
+.BULGE {
+    background-color: rgb(112, 253, 112);
+    color: black;
+}
+.MUTATION-FONT {
+    color: red;
+    font-weight: bold;
+}

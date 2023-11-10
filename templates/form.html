@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} jieweb {% endblock %}
+{% block content %}
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="../../static/css/style.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>   
+<div class="container">
+    <div class="card mt-3">
+        {% csrf_token %}
+        <script>csrf_token= "{{ csrf_token }}"</script>
+        <div class="card-header fs-5 fw-bold">
+            Transcriptgene
+        </div>
+        <div id="message"></div>
+        <div class='card-body'>
+            <form id="ajax_form">
+                <label for="gene_id" class="form-label">Gene ID:</label>
+                <input id = "input" type="text" class="form-control" name="gene_id" placeholder="eg. WBGene00000010">
+            </form>
+            <hr>
+            <button class="btn btn-outline-primary" id="submit">送出</button>
+        </div>
+
+    </div>
+</div>
+<!--for datatable-->
+<table class="table table-striped" id="table1"></table><br>
+<table class="table table-striped" id="table2"></table>
+<script src="{% static 'js/form.js' %}"></script>
+
+{% endblock %}

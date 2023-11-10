@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} transcript_gene {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="../../static/css/transcriptgene.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>   
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<div>
+    
+
+    <div id="message"></div>
+    <!--unspliced-->
+    <div class="unspliced">
+    <button id="toggleBtn1" class="button">unsliced</button>
+    </div>
+        <!--unspliced number and sequence-->
+    <div class="panel" >
+        <p class="title-number" id="unspliced_title" style="display: none;"></p>
+        <p  class="sequence" id = 'unspliced_sequence' style="display: none;"></p>
+    </div>
+        <!--unspliced tag -->
+    <div class="tag_1" id="tag_1">
+        <span>
+            <em id="tag_legend" style="display: none;">Legends</em>
+        </span>
+        <p class="tag" id="tag_exon_1" style="display: none;">
+            <span class="tag_color_orange" >&nbsp;a&nbsp;</span>
+            Exon
+        </p>
+        <p class="tag" id="tag_exon_2" style="display: none;">
+            <span class="tag_color_yellow" >&nbsp;a&nbsp;</span>
+            Exon
+        </p>
+        <p class="tag" id="tag_UTR" style="display: none;">
+            <span class="tag_color_gray">&nbsp;a&nbsp;</span>
+            UTR
+        </p>
+        <p class="tag" id="tag_intron" style="display: none;">
+            <span class="tag_color_white">&nbsp;a&nbsp;</span>
+            Intron
+        </p>
+    </div>
+        <!--for d3-->
+    <div class="tooltip_u" style="opacity: 0;"></div>
+    <svg width="1800" height="100" id="unspliced_d3"></svg>
+        <!--unspliced table list-->
+    <table class="table table-striped" id="table1"></table>
+
+    <!--spliced-->
+    <div class="spliced">
+    <button id="toggleBtn2" class="button">spliced</button>
+    </div>
+        <!--spliced number and sequence-->
+    <div class="panel" >
+        <p class="title-number" id="spliced_title" style="display: none;"></p>
+        <p  class="sequence" id = 'spliced_sequence' style="display: none;"></p>
+        
+    </div>
+        <!--spliced tag -->
+    <div class="tag_2" id="tag_2">
+        <span>
+            <em id="tag_legend_s" style="display: none;">Legends</em>
+        </span>
+        <p class="tag" id="tag_exon_1_s" style="display: none;">
+            <span class="tag_color_orange">&nbsp;a&nbsp;</span>
+            Exon
+        </p>
+        <p class="tag" id="tag_exon_2_s" style="display: none;">
+            <span class="tag_color_yellow">&nbsp;a&nbsp;</span>
+            Exon
+        </p>
+        <p class="tag" id="tag_UTR_s" style="display: none;">
+            <span class="tag_color_gray">&nbsp;a&nbsp;</span>
+            UTR
+        </p>
+
+        </div>
+        
+        <!--for d3-->
+    <div class="tooltip_s" style="opacity: 0;"></div>
+    <svg width="1800" height="100" id="spliced_d3"></svg>
+       <!--spliced table list-->
+    <table class="table  table-striped " id="table2"></table>
+    <!--protein-->
+    <div class="protein">
+    <button id="toggleBtn3" class="button">protein</button>
+    </div>
+        <!--protein number and sequence-->
+    <div class="panel" >
+        <p class="title-number" id="protein_title" style="display: none;"></p>
+        <p  class="sequence" id = 'protein_sequence' style="display: none;"></p>
+    </div>
+        <!--protein table list-->
+    <table class="table table-striped " id="table3"></table>
+    
+
+    <div id="message"></div>
+    <!-- <script src="{% static 'js/myscript.js' %}"></script>   -->
+    
+</div>
+<!--for datatable-->
+<script src="{% static 'js/transcript.js' %}"></script>
+{% endblock %}

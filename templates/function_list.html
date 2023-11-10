@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Function list {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+<link rel="stylesheet" href="../../static/css/function_list.css"> 
+<!DOCTYPE html>
+
+
+<div class="flex-container" >
+    
+    <button type="button" class="text-white" onclick="window.open('http://127.0.0.1:8000/web_tool/form/', '_blank')">Search Gene</button>
+    
+    <button type="button" class=" text-white" onclick="window.open('http://127.0.0.1:8000/web_tool/filter/', '_blank')">Filter</button>
+
+
+</div>
+<script src="{% static 'js/function_list.js' %}"></script>
+{% endblock %}

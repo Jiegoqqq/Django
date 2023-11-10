@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 22G read count {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="../../static/css/read_count.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>  
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://unpkg.com/popper.js@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6.3.0/dist/tippy-bundle.umd.min.js"></script>
+
+
+
+<div class="container">
+    <div class="card mt-3">
+        
+        <div class="card-header fs-5 fw-bold">
+            Search
+        </div>   
+        <table id="target_table" class="cell-border hover no-footer dataTable">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="select_all" onclick="toggleAll(this)"> Select all</th>
+                    <th>RNANAME</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added dynamically -->
+            </tbody>
+        </table>
+        
+        <button class="btn btn-outline-primary" id="submit">Search</button>
+        <div id='tag1'class="card-body">
+  
+    </div>
+</div>
+<!-- select all button -->
+<script>
+    function toggleAll(source) {
+        var checkboxes = document.querySelector('#target_table tbody .pirtarbase_checkbox');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    };
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAllCheckbox = document.querySelector('#select_all');
+
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('#target_table tbody .pirtarbase_checkbox');
+
+            if (checkboxes) {
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            } else {
+                console.log("Checkboxes not found.");
+            }
+        });
+    } else {
+        console.log("Select All checkbox not found.");
+    }
+});
+</script>
+<script src="{% static 'js/read_count.js' %}"></script>
+{% endblock %}

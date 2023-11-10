@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Filter {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="../../static/css/filter.css"> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>   
+
+
+<div class="container">
+    <div class="card mt-3">
+        
+        <div class="card-header fs-5 fw-bold">
+            Filter
+        </div>   
+        <div class='card-body'>
+            <form id="ajax_form">            
+            <!--gene-->  
+            <div class="row align-items-center">
+                <div class="col-3">
+                    gene
+                </div>
+                <div class="col-3">
+                    <textarea id="genelistInput" name="genelistInput" style="resize: none;" value="lin-41" placeholder="enter gene(s) or not" rows="4"></textarea>
+                </div>
+            </div>
+            <!--miRNA-->  
+            <div class="row align-items-center">
+                <div class="col-3">
+                    miRNA
+                </div>
+                <div class="col-3">
+                    <textarea id="miRNAlistInput" name="miRNAlistInput" style="resize: none;" placeholder="enter miRNA(s) or not" rows="4"></textarea>
+                </div>
+            </div>
+            <!--Read count -->   
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <label for="readcount">Read count</label>
+                </div>
+                <div class="col-2">
+                    <select name="readcount_mode" id="readcount_mode" style="width: 100px;">   
+                        <option value="1">&gt;</option> 
+                        <option value="2">&lt;</option>    
+                        <option value="3">=</option>
+                        <option value="4">None</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" id="readcount" name="readcount" value="5" min="0" max="1000" step="0.1">
+                </div>
+            </div>
+            <!--RNAup score-->
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <label for="RNAup_min_energy"><span class="text-success">RNAup</span> binding energy with <span class="text-danger">minimum</span> extension</label><br>
+                </div>
+                <div class="col-2">
+                    <select name="RNAup_score_mode" id="RNAup_score_mode" style="width: 100px;">    
+                        <option value="2">&lt;</option> 
+                        <option value="1">&gt;</option>      
+                        <option value="3">=</option>
+                        <option value="4">None</option>
+                        
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" id="RNAup_score" name="RNAup_score" value="-10" min="-100" max="0" step="0.1">
+                    <span>(kcal/mol)</span>
+                </div>
+            </div>
+            <!--miRanda energy-->
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <label for="miranda_min_energy"><span class="text-primary">miRanda</span> binding energy with <span class="text-danger">minimum</span> extension</label><br>
+                </div>
+                <div class="col-2">
+                    <select name="miRanda_energy_mode" id="miRanda_energy_mode" style="width: 100px;">    
+                        <option value="4">None</option>
+                        <option value="1">&gt;</option>    
+                        <option value="2">&lt;</option>    
+                        <option value="3">=</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" id="miRanda_energy" name="miRanda_energy" value="0" min="-100" max="0" step="0.1">
+                    <span>(kcal/mol)</span>
+                </div>
+            </div>
+            <!--RNAup max score-->
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <label for="RNAup_max_energy"><span class="text-success">RNAup</span> binding energy with <span class="text-warning">maximum</span> extension</label><br>
+                </div>
+                <div class="col-2">
+                    <select name="RNAup_max_score_mode" id="RNAup_max_score_mode" style="width: 100px;">    
+                        <option value="4">None</option>
+                        <option value="1">&gt;</option>    
+                        <option value="2">&lt;</option>    
+                        <option value="3">=</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" id="RNAup_max_score" name="RNAup_max_score" value="0" min="-100" max="0" step="0.1">
+                    <span>(kcal/mol)</span>
+                </div>
+            </div>
+            <!--miRanda max energy-->
+            <div class="row align-items-center">
+                <div class="col-4">
+                    <label for="miranda_max_energy"><span class="text-primary">miRanda</span> binding energy with <span class="text-warning">maximum</span> extension</label><br>
+                </div>
+                <div class="col-2">
+                    <select name="miranda_max_energy_mode" id="miranda_max_energy_mode" style="width: 100px;">    
+                        <option value="4">None</option>
+                        <option value="1">&gt;=</option>    
+                        <option value="2">=&lt;</option>    
+                        <option value="3">=</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <input type="number" id="miranda_max_energy" name="miranda_max_energy" value="0" min="-100" max="0" step="0.1">
+                    <span>(kcal/mol)</span>
+                </div>
+            </div>
+
+
+            
+            </form>  
+            <br>
+            <button class="btn btn-outline-primary" id="submit">Search</button>
+        </div>  
+    <div class="card-body">
+        <div class="card-body">
+            <div class="hint d-flex justify-content-end">
+                <span class="GU">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>:G-U Mismatch&nbsp;</span>
+                <span class="NGU">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>:non G-U Mismatch&nbsp;</span>
+                <span class="BULGE">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span>:Bulge&nbsp;</span>
+                <span class="MUTATION-FONT">T</span>
+                <span>:Mutation&nbsp;</span>
+                <span>ss</span>
+            </div>
+            <table class="table table-striped" id="table1" ></table><br> 
+            </div>
+        </div>
+    </div>   
+        
+    </div>
+</div>
+
+
+    
+<script src="{% static 'js/filter.js' %}"></script>
+{% endblock %}

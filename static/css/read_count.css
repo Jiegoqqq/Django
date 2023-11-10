@@ -1,0 +1,171 @@
+#b{
+    font-size: 12pt;
+    background-color:skyblue !important;
+    font-family: monospace !important;
+    color: black;
+}
+
+#g{
+    font-size: 12pt;
+    background-color: rgb(109, 221, 109) !important;
+    font-family: monospace !important;
+    color: black;
+}
+#y{
+    font-size: 12pt;
+    background-color: yellow !important;
+    font-family: monospace !important;
+    color: black;
+}
+
+#L{
+    font-size: 15pt;
+    color: red !important;
+    font-family: monospace !important;
+    color: black;
+}
+#m{
+    font-size: 12pt;
+    background-color: #b3d186 !important;
+    font-family: monospace !important;
+    color: black;
+}
+
+
+
+span .y{
+    /* background-color: yellow !important;  */
+    font-family: monospace !important;
+  }
+
+mark{
+    background-color: yellow !important; /*Add your desired color*/
+}
+.pairing-sequence{
+    text-align: left;
+    font-family: monospace;
+}
+span{
+    font-family: monospace;
+}
+.GU {
+    background-color:#a1c2e4;
+    color: black;
+}
+.NGU {
+    background-color: #fffb13;
+    color: black;
+}
+.BULGE {
+    background-color: #13ffe0;
+    color: black;
+}
+.MUTATION-FONT {
+    color: red;
+    font-weight: bold;
+}
+.UTR5 {
+    background-color: #FFDEAD;
+}
+.CDS {
+    background-color: #8FBC8F;
+}
+.UTR3 {
+    background-color: #FFB6C1;
+}
+.IDREGION {
+    background-color: blue;
+}
+.MUTATION {
+    background-color: orange;
+}
+
+/*for search*/
+.equal_space {
+    font-family: 'Courier New', Courier, monospace;
+}
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.tooltip {
+    position: absolute;
+    background-color: gray;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none; /*讓鼠標持續顯示*/
+    color: white;
+  }
+.tooltip_c {
+    position: absolute;
+    background-color: gray;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none; /*讓鼠標持續顯示*/
+    color: white;
+  }
+.tooltip_g {
+    position: absolute;
+    background-color: gray;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none; /*讓鼠標持續顯示*/
+    color: white;
+  }
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.hidden-table {
+    display: none;
+    position: absolute;
+    top: -100%; /* 調整這個值以控制表格顯示的位置 */
+    background: gray;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 2500px;
+    z-index: 9999;
+}
+.custom-tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: 100%; /* 放置在按钮的上方 */
+    left: 0; /* 调整位置，根据需要进行修改 */
+    background-color: black; /* 可选：自定义背景颜色 */
+    border: 1px solid #ccc; /* 可选：自定义边框 */
+    max-width: 2500px; /* 设置最大宽度 */
+    padding: 10px; /* 可选：自定义内边距 */
+    z-index: 99999999999999999; /* 设置更高的z-index值，确保它覆盖 DataTable 标题 */
+}
+/* .tippy-box {
+    position: relative;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: normal;
+    outline: 0;
+    transition-property: transform,visibility,opacity;
+} */
+/* .tippy-content {
+    position: relative;
+    padding: 5px 9px;
+    z-index: 1;
+} */
+/* .tippy-box {
+    max-width: 1500px; 
+    background-color: white; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-radius: 4px; 
+    padding: 10px; 
+  }
+   */
+  /* Optional: Style the tooltip arrow */
+  .tippy-arrow {
+    border-top-color: white; /* Arrow color */
+  }

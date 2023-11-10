@@ -1,0 +1,221 @@
+*{box-sizing: border-box;}
+body {
+  background-color: white;
+}
+.s{
+ flex-grow: 1; /*可佔滿垂直剩餘的空間*/
+}
+.unspliced{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.spliced{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.protein{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.button{
+   background-color:Gainsboro;
+   border-radius:10px;
+   width:200px;
+   height:66px;
+}
+.table {
+    margin: auto;
+    width: 100% !important; 
+    white-space: normal !important;
+    word-break:break-word;;
+ }
+.title-number{ 
+    
+    width:400px; /*與左邊間距*/
+    line-height: 1em;/*改數字行距*/
+    text-align:right;
+    float:left;
+    
+    
+
+}
+.number_title{
+
+    line-height: 1.3em;
+    font-family: monospace;
+    color:DarkGrey;
+}
+
+.sequence{
+    font-family: monospace;
+    font-size: 1em;
+    line-height: 1.3em;
+    margin: 1em 0;
+    margin-top: 0em;
+    margin-right: 0px;
+    margin-bottom: 1em;
+    margin-left: 0px;
+    word-break:52px;
+    float: left;
+    
+
+    
+}
+/*用來新增10個一空白*/
+.sequence span:nth-child(10n) {
+    margin-right: 0.5em;
+}
+/*用來50個一換行*/
+.sequence span:nth-child(50n+1):before {
+    content: "";
+    display: block;
+}
+
+.five_utr_sequence{
+    line-height:20px;
+    font-size:15px;
+    background-color: #ccc;
+}
+.exon_sequence_0{
+    line-height:20px;
+    font-size:15px;
+    background-color: yellow;;
+}
+.exon_sequence_1{
+    line-height:20px;
+    font-size:15px;
+    background-color: orange;;
+}
+.intron_sequence{
+    line-height:20px;
+    font-size:15px;
+    background-color: white;
+}
+.three_utr_sequence{
+    line-height:20px;
+    font-size:15px;
+    background-color: #ccc;
+}
+.protein_sequence{
+    line-height:20px;
+    font-size:15px;
+    background-color: #ccc;
+}
+.unspliced_sequence{
+    width: 200px;
+    display: inline-block;
+    /*display:inline;*/
+}
+.tag_1{
+    float: left;
+}
+.tag_2{
+    float: left;
+}
+em{
+    font-style: italic;
+}
+.tag{
+    margin: 4px 0;
+    font-family: monospace;
+    
+}
+.tag_color_orange{
+    text-transform: uppercase;
+    background-color: orange;
+    border: solid 1px #e0e0e0;
+    flex-grow: 0;
+    max-width: 100%;
+    flex-basis: 100%;
+    font-family: monospace;
+}
+.tag_color_yellow{
+    text-transform: uppercase;
+    background-color: yellow;
+    border: solid 1px #e0e0e0;
+    flex-grow: 0;
+    max-width: 100%;
+    flex-basis: 100%;
+    font-family: monospace;
+}
+.tag_color_gray{
+    text-transform: uppercase;
+    background-color: #ccc;
+    border: solid 1px #e0e0e0;
+    flex-grow: 0;
+    max-width: 100%;
+    flex-basis: 100%; 
+    font-family: monospace;
+}
+.tag_color_white{
+    text-transform: uppercase;
+    background-color: white;
+    border: solid 1px #e0e0e0;
+    flex-grow: 0;
+    max-width: 100%;
+    flex-basis: 100%; 
+    font-family: monospace;
+}
+.tooltip_u {
+    position: absolute;
+    background-color: GhostWhite;
+    border: 1px solid #292222;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none;  /*讓鼠標持續顯示*/
+  }
+  .tooltip_s {
+    position: absolute;
+    background-color: GhostWhite;
+    border: 1px solid #292222;
+    padding: 10px;
+    opacity: 0;
+    pointer-events: none; /*讓鼠標持續顯示*/
+  }
+/*for loading Container & Spinners*/
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it appears on top of other elements */
+}
+  .loading-spinner {
+    
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    border-top: 20px solid white; /* Adjust the color to your liking */
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it's above other elements */
+    display: none; /* Initially hidden */
+  }
+  .loading-time {
+    margin-top: 10px;
+  }
+  
+  
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  
+  
+
+

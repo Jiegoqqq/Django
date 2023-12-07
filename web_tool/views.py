@@ -17,6 +17,7 @@ from django.db.models import Q
 #my function 
 from crawler import crawler
 from plot import plot
+from plot2 import plot2
 from django.db.models import Q
 
 
@@ -506,6 +507,8 @@ def pirScan(request,id):
         f.write('>{}\n'.format(id)+data[3])
     os.system('python3 piTarPrediction.py inputSeq.fa ce none [0,2,2,3,6]') #windows 用 python ; linux 用 python3
     os.chdir(current_working_directory) #換回原本的資料夾
+
+    
     return render(request, 'pirscan.html', locals())
 def pirScan_data(request):
     transcript_name =request.POST['transcript_id']
@@ -1225,8 +1228,8 @@ def read_count_data(request):
             'start_clash':int(start_end_clash [0]),
             'end_clash':int(start_end_clash [1]),
             })
-    table_list = plot(table_list,'pirScan_min_ex_target_rna_sequence','pirScan_min_ex_regulator_rna_sequence','pirScan_pairing')   
-    table_list = plot(table_list,'rnaup_max_ex_target_rna_sequence','rnaup_max_ex_regulator_rna_sequence','rnaup_pairing')
+    table_list = plot2(table_list,'pirScan_min_ex_target_rna_sequence','pirScan_min_ex_regulator_rna_sequence','pirScan_pairing')   
+    table_list = plot2(table_list,'rnaup_max_ex_target_rna_sequence','rnaup_max_ex_regulator_rna_sequence','rnaup_pairing')
     table_list = sorted(table_list, key=itemgetter('start_clash')) #排序list
 
     unspliced,spliced,data1,data2,data,spliced_sp  = crawler(transcript_name)
@@ -1489,8 +1492,8 @@ def read_count_data2(request):
             'start_clash':int(start_end_clash [0]),
             'end_clash':int(start_end_clash [1]),
             })
-    table_list = plot(table_list,'pirScan_min_ex_target_rna_sequence','pirScan_min_ex_regulator_rna_sequence','pirScan_pairing')   
-    table_list = plot(table_list,'rnaup_max_ex_target_rna_sequence','rnaup_max_ex_regulator_rna_sequence','rnaup_pairing')
+    table_list = plot2(table_list,'pirScan_min_ex_target_rna_sequence','pirScan_min_ex_regulator_rna_sequence','pirScan_pairing')   
+    table_list = plot2(table_list,'rnaup_max_ex_target_rna_sequence','rnaup_max_ex_regulator_rna_sequence','rnaup_pairing')
     table_list = sorted(table_list, key=itemgetter('start_clash')) #排序list
 
     unspliced,spliced,data1,data2,data,spliced_sp  = crawler(transcript_name)

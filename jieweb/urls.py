@@ -6,5 +6,6 @@ from web_tool import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('web_tool/', include('web_tool.urls')),
+    path('web_tool/', include('cancer.urls')),
 
 ]

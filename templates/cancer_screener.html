@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Cancer Screener {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+
+
+<link rel="stylesheet" href="{% static 'css/cancer.css' %}">
+
+<!-- JQuery 連結 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> 
+
+<!-- Include jQuery UI for autocomplete -->
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+
+<div id='search_table' class="my-container" style="width: 80%;" >
+    <div class="card "> 
+        <div class="card-header">
+        <h4 style="text-align:left"><b><i class="fas fa-user-cog"></i>  Search </b></h4> 
+        </div>  
+        <div class="card-body">
+            <div class="centered">
+                <p style="font-weight: bold; font-size: 20px"> Search type </p>
+            </div>
+            <div class="checkbox-container">
+                <label id="label1">
+                    <input type="checkbox" id="checkbox1" name="checkbox1" > DE Gene
+                </label>
+                <label id="label2">
+                    <input type="checkbox" id="checkbox2" name="checkbox2"> DE Isoform
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="my-container" style="width: 80%;" >
+    <div class="card "> 
+        <div class="card-body">
+            <div class="centered">
+                <p style="font-weight: bold; font-size: 20px"> Select a Cancer </p><br>
+            </div>
+            <select id="select_cancer" style="width: 500px; margin: 0 auto; display: block; text-align: center;">
+                <option>Select a Cancer </option>
+                <option>Adrenal Gland</option>
+            </select>
+    </div>
+    </div>
+</div>
+<br>
+<div id="spinner-container">
+    <div class="spinner"></div>
+    <p id="timer">0</p>
+</div>
+<div class="my-container" style="width: 80%;" >
+    <div class="card "> 
+        <div class="card-body">
+            <div class="centered">
+                <p style="font-weight: bold; font-size: 20px"> Select a Stage </p> 
+            </div>
+            <select id="select_stage" style="width: 500px; margin: 0 auto; display: block; text-align: center;">
+                <option >Select a Stage </option>
+                <option value="stage_i">Stage 1</option>
+                <option value="stage_ii">Stage 2</option>
+                <option value="stage_iii">Stage 3</option>
+                <option value="stage_iv">Stage 4</option>
+                <option value="all_stage">All stage</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br>
+<div class="my-container" style="width: 80%;" >
+    <div class="card "> 
+        <div class="card-body">
+            <div class="centered">
+                <p style="font-weight: bold; font-size: 20px"> Input High and Low Percentile </p><br><br>
+            </div>
+            
+            <div class="checkbox-container">
+                <p>High Percentile</p>   <p>Low Percentile</p>
+            </div>
+            <div class="checkbox-container">
+                <input id = "High_Percentile_input" type="text" class="form-control" name="High_Percentile" style="text-align: center;" placeholder="50" value="50"><br><br>
+                <input id = "Low_Percentile_input" type="text" class="form-control" name="Low_Percentile" style="text-align: center;" placeholder="50" value="50">
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="my-container" style="width: 80%;" >
+    <div class="card "> 
+        <div class="card-body">
+            <div class="centered">
+                <p style="font-weight: bold; font-size: 20px"> Input threshold valus of the p-valus </p>
+                <p>P-Value</p>
+            </div>
+            <input id = "Pvalue_input" type="text" class="form-control" name="Pvalue" style="width: 500px; margin: 0 auto; display: block; text-align: center;" placeholder="0.05" value="0.05">
+        </div>
+    </div>
+</div>
+<br>
+<div class="centered">
+    <button class="btn btn-outline-primary" id="submit">Submit</button>
+</div>
+<br>
+<div id='result_table' class="my-container" style="width: 80%;"></div><br>
+</div>
+
+
+
+
+<!-- 額外javascript -->
+<script src="{% static 'js/cancer_screener.js' %}"></script>
+
+<script>
+    var CancerType; //訂成全域變數其他script也可以接收到值了
+    //checkbox 的值
+    document.addEventListener("DOMContentLoaded", function() {
+    var checkbox1 = document.getElementById("checkbox1");
+    var label1 = document.getElementById("label1");
+    var checkbox2 = document.getElementById("checkbox2");
+    var label2 = document.getElementById("label2");
+
+
+    checkbox1.addEventListener("change", function() {
+        if (checkbox1.checked) {
+            CancerType = label1.textContent;
+            console.log("checked: " + CancerType);
+        }
+    });
+    checkbox2.addEventListener("change", function() {
+        if (checkbox2.checked) {
+            CancerType = label2.textContent;
+            console.log("checked: " + CancerType);
+        }
+    });
+});
+</script>
+
+{% endblock %}

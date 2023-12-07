@@ -54,7 +54,7 @@ def csv2mysql(df, table_name):
     df.to_sql(table_name, con=engine, if_exists='replace', index=False, dtype=data_types)
 
 # Read the CSV file, specifying the first row as column names
-df = pd.read_csv('/home/cosbi/forme/ML/WT_CRISPR_WAGO_1_FLAG_IP_sRNA_seq_bedgraph.csv', header=0)
+df = pd.read_csv('/home/cosbi/Downloads/survival_analysisv3.zip-20231129T042824Z-001/survival_analysisv3/data/TCGA-ACC_isoforms_FPKM_Cufflinks.csv', header=0)
 
 # Call the function to insert the DataFrame into the MySQL table with the specified data types
-csv2mysql(df, 'WT_CRISPR_WAGO_1_FLAG_IP_sRNA_seq_bedgraph')
+csv2mysql(df, 'TCGA_ACC_isoforms_FPKM_Cufflinks')

@@ -1,0 +1,131 @@
+.header {
+    font-size:80px;
+    padding: 10px;
+    color: white;
+    text-align:center;
+    line-height: 100px;
+    background-color: Gainsboro;
+    width: 100%; 
+    
+    
+    
+  }
+.footer {
+  font-size:15px;
+  padding: 10px;
+  color: black;
+  text-align:center;
+  line-height: 20px;
+  width: 100%; 
+}
+.my-container {
+  width: 80%; /* 這裡的寬度可以根據需要進行調整 */
+  margin: 0 auto;
+}
+
+.add-background {
+  background-color: LightCyan !important;
+}
+.button-container {
+  text-align: right ;
+}
+
+.download-btn{
+    background-color: red;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+    margin: auto; /* Center the button horizontally */
+
+}
+
+.download-btn:hover {
+    background-color: RoyalBlue;
+  }
+
+.ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    z-index: 1000;
+}
+/* Centering container */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the button */
+#downloadButton {
+  padding: 10px 20px; /* Add some padding for better appearance */
+}
+
+.checkbox-container {
+  display: flex;
+}
+.checkbox-container p {
+  flex: 1;
+  text-align: center;
+}
+
+.checkbox-container label {
+  flex: 1;
+  text-align: center;
+}
+.checkbox-container select {
+  flex: 1;
+  text-align: center;
+  width: 60%;
+}
+.centered {
+  text-align: center;
+}
+.box {
+  text-align: center;
+ 
+  padding: 5px; /* 内边距 */
+  font-weight: bold; /* 粗体 */
+  display: inline-block; /* 使块级元素变成行内块元素 */
+}
+/* 計時器的部份 */
+#spinner-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: gray;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.spinner {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid white;
+  border-top: 4px solid transparent;
+  animation: spin 1s linear infinite;
+  margin: auto;
+  z-index: 9999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+#timer {
+  text-align: center;
+  font-size: 100px;
+}
+/* 計時器的部份 */
+
+

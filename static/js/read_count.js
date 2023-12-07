@@ -37,6 +37,8 @@ $(document).ready(function(){
          success: function(response){
             check_box=response.check_box
 
+
+
             $('#target_table').DataTable({
                 "data": check_box,
                 "columns": [
@@ -69,10 +71,10 @@ $(document).ready(function(){
             });
 
             // Handle "Select All" checkbox
-        function toggleAll(source) {
-            var checkboxes = table.column(0).nodes().to$().find(':checkbox');
-            checkboxes.prop('checked', source.checked);
-        }
+        // function toggleAll(source) {
+        //     var checkboxes = table.column(0).nodes().to$().find(':checkbox');
+        //     checkboxes.prop('checked', source.checked);
+        // }
             
         const firstCheckbox = document.querySelector('.pirtarbase_checkbox');
         firstCheckbox.checked = true;
@@ -81,7 +83,7 @@ $(document).ready(function(){
     // Customize this function to generate the popover content based on the data
     return `
     <div class="tippy-content" data-state="visible" style="transition-duration: 300ms;">
-        <table class="table" style="color: white;">
+        <table class="table" style="color: white; id='table123'">
             <thead>
                 <tr>
                     <th>CLASH read ID</th>
@@ -108,8 +110,8 @@ $(document).ready(function(){
             info: true,
             //滑動功能
             scrollCollapse: true, 
-            scrollX: "1000px",
-            scrollY: "1000px", 
+            scrollX: "1500px",
+            scrollY: "1500px", 
             data: response.table_list,
             columns: [
                 {
@@ -118,31 +120,28 @@ $(document).ready(function(){
                     render: function (data, type, full, meta) {
                         if (type === 'display') {
                             const buttonHtml = `
-                            <div class="button-container">
-                            <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="top" style="max-width: 2500px; transition-duration: 300ms;">
-                                <div class="custom-tooltip-content" data-state="visible" style="transition-duration: 300ms; display: none;">
-                                    ${generatePopoverContent(full)}
-                                </div>
-                            </div>
-                            <div class="tippy-arrow" style="position: absolute; left: 50%; transform: translateX(-50%);"></div>
-                            <button type="button" class="btn btn-outline-secondary clash-info" 
-                                data-tippy-allowhtml="true" 
-                                data-tippy-maxwidth="1500" 
-                                data-tippy-trigger="click" 
-                                data-tippy-interactive="true" 
-                                data-tippy-placement="top" 
-                                aria-expanded="false">
-                                ${data}
-                            </button>
-                        </div>
-                        
-                            `;
+                                <div class="button-container" style="position: relative;">
+                                    <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="bottom" style="max-width: 2500px; transition-duration: 300ms;">
+                                        <div class="custom-tooltip-content" data-state="visible" style="transition-duration: 300ms; display: none;">
+                                            ${generatePopoverContent(full)}
+                                        </div>
+                                    </div>
+                                    <div class="tippy-arrow" style="position: absolute; left: 50%; transform: translateX(-50%);"></div>
+                                    <button type="button" class="btn btn-outline-secondary clash-info" 
+                                        data-tippy-allowhtml="true" 
+                                        data-tippy-maxwidth="1500" 
+                                        data-tippy-trigger="click" 
+                                        data-tippy-interactive="true" 
+                                        data-tippy-placement="top" 
+                                        aria-expanded="false">
+                                        ${data}
+                                    </button>
+                                </div>`;
                             return buttonHtml;
                         }
                         return data;
                     }
                 },
-                
                 { data: 'hybrid Count', title: "hybrid Count" },
                 { data: 'Clash identified region', title: "Clash identified region" },                    
                 { data: 'predicted binding site from pirScan', title:"predicted binding site from pirScan"},

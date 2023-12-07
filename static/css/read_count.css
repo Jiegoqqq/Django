@@ -18,11 +18,8 @@
     color: black;
 }
 
-#L{
-    font-size: 15pt;
-    color: red !important;
-    font-family: monospace !important;
-    color: black;
+#L {
+    color: #CE0000;
 }
 #m{
     font-size: 12pt;
@@ -133,39 +130,17 @@ table.dataTable {
 .custom-tooltip-content {
     display: none;
     position: absolute;
-    bottom: 100%; /* 放置在按钮的上方 */
-    left: 0; /* 调整位置，根据需要进行修改 */
+    top: 50%;
+    /* bottom: 100%; 放置在按钮的上方 */
+    left: 100%; /* 调整位置，根据需要进行修改 */
     background-color: black; /* 可选：自定义背景颜色 */
     border: 1px solid #ccc; /* 可选：自定义边框 */
     max-width: 2500px; /* 设置最大宽度 */
     padding: 10px; /* 可选：自定义内边距 */
     z-index: 99999999999999999; /* 设置更高的z-index值，确保它覆盖 DataTable 标题 */
 }
-/* .tippy-box {
-    position: relative;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-    font-size: 14px;
-    line-height: 1.4;
-    white-space: normal;
-    outline: 0;
-    transition-property: transform,visibility,opacity;
-} */
-/* .tippy-content {
-    position: relative;
-    padding: 5px 9px;
-    z-index: 1;
-} */
-/* .tippy-box {
-    max-width: 1500px; 
-    background-color: white; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    border-radius: 4px; 
-    padding: 10px; 
-  }
-   */
-  /* Optional: Style the tooltip arrow */
+
   .tippy-arrow {
     border-top-color: white; /* Arrow color */
   }
+  

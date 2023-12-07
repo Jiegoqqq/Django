@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Cancer {% endblock %}
+{% block content %}
+{% csrf_token %}
+<script>csrf_token= "{{ csrf_token }}"</script>
+<link rel="stylesheet" href="{% static 'css/cancer.css' %}">
+<!-- ../../static/css/cancer.css" -->
+<!-- DataTables -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>    -->
+
+<!-- JQuery 連結 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- Include jQuery UI for autocomplete -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <!-- 搜尋欄 -->
+<!-- <div class="container">
+    <div class="card mt-3">
+        <div class="card-header fs-5 fw-bold">
+            Survival analysis
+        </div>
+        <div id="message"></div>
+        <div class='card-body'>
+            <div class="FormOption">
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Input a gene/transcript name : </label>
+                <div class="col-sm-7">
+                  <div class="input-group">
+                    <div class="btn-group bootstrap-select input-group-btn"><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" data-id="GT_select" title="Gene symbol" aria-expanded="false"><span class="filter-option pull-left">Gene symbol</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox" style="max-height: 629px; overflow: hidden; min-height: 0px;"><ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 617px; overflow-y: auto; min-height: 0px;"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true"><span class="text">Gene symbol</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="false"><span class="text">Transcript name</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div><select class="selectpicker" name="input_element" id="GT_select" tabindex="-98">
+                                          <option value="genes" data-title="genes" data-placeholder="gene symbol">Gene symbol</option>
+                                          <option value="isoforms" data-title="isoforms" data-placeholder="transcript name">Transcript name</option>
+                                      </select></div>
+                    <input type="text" id = "input" name="input_element" class="form-control ui-autocomplete-input" placeholder="KIF23" style="position:initial;border:1px solid #245580;border-left:0" autocomplete="off"><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                  <th class="text-center" style="width: 10%;background-color: #8B0000; color: #FFFFFF"></th>
+                  <div class="col">
+                    <input type="checkbox" class="cancer-checkbox" id="selection1" >
+                  </div>
+                  <div class="col">
+                    <label id ='label1' for="selection1">Adrenal Gland</label>
+                  </div>
+                </div>
+              </div>
+            <hr>
+            <button class="btn btn-outline-primary" id="submit" >送出</button>
+ 
+        </div>
+    </div>
+</div> -->
+<!-- 搜尋結果欄 -->
+<div class="container" id ="container">
+  <div class="card mt-3 w-100">
+      <div class="card-header fs-5 fw-bold ">
+          Search Result
+      </div>
+      <div class="input-group" style="width: 85%;z-index:0;height: 42px;margin-top: 15px;margin-left: 5%;">
+        <span class="input-group-addon" style="border-right:0;width:20%;padding: 2px 8px;">
+          <span style="font-weight: bold">Lower Percentile</span>
+          <hr style="width: 80%; color: black; height: 2px; background-color:#8B0000;">
+          <input type="text" id="survival_input_low" name="input_low" class="form-control" placeholder="Low Percentile" value="50" style="width:100%;height: 22px;"></span>
+          <span class="input-group-addon" style="border-right:0;width:20%;padding: 2px 8px;"><span style="font-weight: bold">High Percentile</span>
+          <hr style="width: 100%; color: black; height: 2px; background-color:#8B0000;">
+          <input type="text" id="survival_input_high" name="input_high" class="form-control" placeholder="High Percentile" value="50" style="width:100%;height: 22px;"></span>
+          <span class="input-group-addon" style="width:20%;padding: 2px 8px;"><span style="font-weight: bold">Days</span>
+          <hr style="width: 100%; color: black; height: 2px; background-color:#8B0000;">
+          <input type="text" id="survival_input_days" name="input_days" class="form-control" placeholder="Days" value="4673" style="width:100%;height: 22px;"></span>
+          <span class="input-group-addon" style="border-left:0;padding: 2px 8px;width: 20%"><span style="font-weight: bold">Samples Included</span>
+          <hr style="width: 100%; color: black; height: 2px; background-color:#8B0000;">
+          <select id="survival_select" style="height: 22px;width: 100%;" name="samples_select">
+            <option value="all_stage">All Cancer Stages</option>
+            <option value="stage_i">Only stage i</option>
+            <option value="stage_ii">Only stage ii</option>
+            <option value="stage_iii">Only stage iii</option>
+            <option value="stage_iv">Only stage iv</option></select></span><span class="input-group-btn">
+              <button id="plot_submit" name="survival_submit" value="TCGA-ACC|genes|KIF23|XgsxBRwvW3" class="btn btn-success" style="height: 100%;width: 100%;border-bottom-left-radius: 0;border-top-left-radius: 0;">Submit</button></span>
+        </div>
+        <!-- 計時器的部份 -->
+        <div id="spinner-container">
+          <div class="spinner"></div>
+          <p id="timer">0</p>
+        </div>
+       <br>
+       <br>
+       <br>
+        <div id="button1"></div>
+
+  </div>
+</div>
+<!-- 額外javascript -->
+<script src="{% static 'js/cancer.js' %}"></script>
+<!-- <script>
+        var CancerKind; //訂成全域變數其他script也可以接收到值了
+        //checkbox 的值
+        document.addEventListener("DOMContentLoaded", function() {
+        var checkbox = document.getElementById("selection1");
+        var label = document.getElementById("label1");
+
+        checkbox.addEventListener("change", function() {
+            if (checkbox.checked) {
+                CancerKind = label.textContent;
+                console.log("Cancer_kind: " + CancerKind);
+            }
+        });
+    });
+</script> -->
+{% endblock %}

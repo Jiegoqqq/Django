@@ -13,7 +13,11 @@
 <script src="https://unpkg.com/popper.js@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://unpkg.com/tippy.js@6.3.0/dist/tippy-bundle.umd.min.js"></script>
 
-
+<link rel="stylesheet" href="https://unpkg.com/tippy.js/dist/tippy.css">
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+<!-- Popper.js -->
+<script src="https://unpkg.com/popper.js@2"></script>
 
 <div class="container">
     <div class="card mt-3">
@@ -38,36 +42,24 @@
   
     </div>
 </div>
+
 <!-- select all button -->
 <script>
-    function toggleAll(source) {
-        var checkboxes = document.querySelector('#target_table tbody .pirtarbase_checkbox');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = source.checked;
+function toggleAll() {
+    var selectAllCheckbox = document.getElementById('select_all');
+
+    $('#target_table').DataTable().rows().every(function () {
+        // Access the row data
+        var rowData = this.data();
+
+        // Find the checkbox in each row and set its checked state
+        var checkbox = this.nodes().to$().find('.pirtarbase_checkbox');
+        if (checkbox.length > 0) {
+            checkbox.prop('checked', selectAllCheckbox.checked);
         }
-    };
-
+    });
+}
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const selectAllCheckbox = document.querySelector('#select_all');
 
-    if (selectAllCheckbox) {
-        selectAllCheckbox.addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('#target_table tbody .pirtarbase_checkbox');
-
-            if (checkboxes) {
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.checked = selectAllCheckbox.checked;
-                });
-            } else {
-                console.log("Checkboxes not found.");
-            }
-        });
-    } else {
-        console.log("Select All checkbox not found.");
-    }
-});
-</script>
 <script src="{% static 'js/read_count.js' %}"></script>
 {% endblock %}

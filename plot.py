@@ -34,7 +34,7 @@ def plot(list,target,regulator,name):
                 ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'
             elif top[j] == 'G' and bottom[j] == 'T':
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'     
-                ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'
+                ans_b += '<span class="y" id="b" >' +'U'+'</span class="y">'
             elif top[j] == 'G' and bottom[j] == 'G':    
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'  
                 ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'       
@@ -50,7 +50,7 @@ def plot(list,target,regulator,name):
                 ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'
             elif top[j] == 'A' and bottom[j] == 'T':  
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'   
-                ans_b += '<span class="y" >' +bottom[j]+'</span class="y">'
+                ans_b += '<span class="y" >' +'U'+'</span class="y">'
             elif top[j] == 'A' and bottom[j] == 'A': 
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'    
                 ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'           
@@ -66,7 +66,7 @@ def plot(list,target,regulator,name):
                 ans_b += '<span class="y" id="b">' +bottom[j]+'</span class="y">'
             elif top[j] == 'U' and bottom[j] == 'T': 
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'     
-                ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'
+                ans_b += '<span class="y" id="y">' +'U'+'</span class="y">'
             elif top[j] == 'U' and bottom[j] == 'U':   
                 ans_u += '<span class="y" >' +top[j]+'</span class="y">'  
                 ans_b += '<span class="y" id="y">' +bottom[j]+'</span class="y">'           

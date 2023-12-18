@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Url Button & Datatables {% endblock %}
+{% block content %}
+{% csrf_token %}
+
+<!-- JQuery 連結 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script> 
+<!-- <a href="javascript:void(0);" onclick="search_matrix_id('AT4G17500');">AT4G17500</a> -->
+<button type="button" onclick="search_matrix_id('AT4G17500');">AT4G17500</button>
+<br>
+<div id='search_table' class="my-container" style="width: 80%; margin: 0 auto;" >
+    <div class="card "> 
+        <div class="card-header">
+        <h4 style="text-align:left"><b><i class="fas fa-user-cog"></i>  Table API </b></h4> 
+        </div>  
+        <div class="card-body">
+        <table id="myDataTable" styles = "font-size: 10px; margin: auto;width: 100% !important; white-space: normal !important; word-break:break-word;"></table>
+        </div>
+    </div>
+</div>        
+<!-- 額外javascript -->
+<script src="{% static 'js/table.js' %}"></script>
+<script>
+//     function search_matrix_id(MatrixID) {
+//         document.body.innerHTML = '<form id="TF_info" action="http://plantpan.itps.ncku.edu.tw/plantpan4/TF_info.php" target="_blank" method="post">'
+//                             + '<input type="hidden" name="GeneID" value="' + MatrixID + '">'
+//                             + '</form>';
+//         document.getElementById("TF_info").submit();
+    
+// }
+function search_matrix_id(MatrixID) {
+    var form = document.createElement('form');
+    form.method = 'post';
+    form.action = 'http://plantpan.itps.ncku.edu.tw/plantpan4/TF_info.php';  //server端頁面的url
+    form.target = '_blank';
+
+    var input1 = document.createElement('input');
+    input1.type = 'hidden';
+    input1.name = 'GeneID';
+    input1.value = MatrixID;
+
+    form.appendChild(input1);
+
+    // 將表單添加到 body 中
+    document.body.appendChild(form);
+
+    // 提交表單
+    form.submit();
+}
+</script>
+{% endblock %}

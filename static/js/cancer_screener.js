@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
           // 更新页面内容
           document.getElementById('result_table').innerHTML = result_table;
-  
+          var max_time = response.result_list[0]['max_time']
           // 初始化 DataTable
           $('#result_table2').DataTable({
             searching: true,
@@ -93,13 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
             columns: [
               { data: 'name', title: "Gene ID" },
               { data: 'logrank_p_value', title: "Gene Sequence" },
-              { data: 'max_time', title: "Numbers" },
+              // { data: 'max_time', title: "Numbers" },
               {
                 data: 'name',
                 title: "view",
                 render: function(data, type, row) {
-                    var maxTime = row.max_time;
-                  return '<button type="button" onclick="window.open(\'/web_tool/cancer_web/' + data +'/'+High_Percentile_input+'/'+Low_Percentile_input+'/'+maxTime+'/'+select_stage_Value+'\', \'_blank\')" class="btn btn-warning btn-sm">site</button>';
+                    // var maxTime = row.max_time;
+                  return '<button type="button" onclick="window.open(\'/web_tool/cancer_web/' + data +'/'+High_Percentile_input+'/'+Low_Percentile_input+'/'+ max_time +'/'+select_stage_Value+'\', \'_blank\')" class="btn btn-warning btn-sm">site</button>';
                 }
               },
             ],

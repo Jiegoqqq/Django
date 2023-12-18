@@ -29,6 +29,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'web_tool',
     'cancer',
+    'rest_framework',
+    'table_api',
+
 ]
 
 MIDDLEWARE = [

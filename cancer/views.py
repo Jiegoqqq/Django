@@ -26,7 +26,7 @@ from io import StringIO
 import mysql.connector
 from tqdm import tqdm
 from multiprocessing import Pool
-from pvalue import PValue
+from function_list.pvalue import PValue
 
 def cancer_web(request,id):
     return render(request, 'cancer.html', locals())
@@ -200,14 +200,6 @@ def cancer_plot_data(request):
 def cancer_screener_web(request):
     return render(request, 'cancer_screener.html', locals())
 
-# Assuming organize_and_cal_pvalue is a function you have defined
-# def process_result(args):
-#     i, result, Low_Percentile_input, High_Percentile_input, Pvalue_input = args
-#     p_value, max_time = organize_and_cal_pvalue(result[i], Low_Percentile_input, High_Percentile_input)
-#     if p_value <= float(Pvalue_input):
-#         return {"name": result[i][0], "logrank_p_value": "{:e}".format(p_value), "max_time": max_time}
-#     else:
-#         return None
 @csrf_exempt  
 def cancer_screener_data(request):
 
@@ -230,50 +222,35 @@ def cancer_screener_data(request):
     result = [[value.strip("'") for value in element.values()] for element in result]
 
     pvalue_analysis = PValue()
+
+
+
+
+
+    import multiprocessing
+
+
+ 
+    with multiprocessing.Manager() as manager:
+        # manager.list() 用於創建一個可以在多個進程之間共享的列表
+        result_list_m = manager.list()
+        # 創建一個 multiprocessing.Pool, 這是一個進程池，用於管理並行執行的進程。processes=4 的參數指定要使用 4 個處理器，預設是全部使用
+        pool = multiprocessing.Pool(processes=4)
+        # 使用 map 函數來平行處理數據
+        # 注意: 如果 all_cancer_data 很大，可以考慮使用 imap 或者 imap_unordered 來節省記憶體
+        pool.starmap(pvalue_analysis.process_data, [(data, Low_Percentile_input, High_Percentile_input, Pvalue_input, result_list_m) for data in tqdm(result)])
+        # 關閉進程池，這表示不再接受新的任務(沒有其他資料與任務需要加到佇列) 
+        pool.close()
+        # 等待所有的工作完成，然後恢復執行主進程
+        pool.join()
+        result_list = list(result_list_m)
+
     # result_list = []
+    #len(result)
     # for i in tqdm(range(len(result))):
     #     p_value, max_time = pvalue_analysis.organize_and_cal_pvalue(result[i], Low_Percentile_input, High_Percentile_input)
     #     if p_value <= float(Pvalue_input):
     #         result_list.append({"name":result[i][0], "logrank_p_value":"{:e}".format(p_value), "max_time":max_time})
-
-
-
-
-    # # Create a list of arguments for the pool
-    pool_args = [(i, result, Low_Percentile_input, High_Percentile_input, Pvalue_input) for i in range(len(result))]
-    # pool_size = 4
-    # with Pool(pool_size) as pool:
-    #     result_list = list(tqdm(pool.imap(pvalue_analysis.parallelprocessing_result, pool_args), total=len(pool_args)))
-
-    # # Remove None results
-    # result_list = [item for item in result_list if item is not None]
-
-    from concurrent.futures import ThreadPoolExecutor
-
-
-    def process_result(i):
-        p_value, max_time = pvalue_analysis.organize_and_cal_pvalue(result[i], Low_Percentile_input, High_Percentile_input)
-        if p_value <= float(Pvalue_input):
-            return {"name": result[i][0], "logrank_p_value": "{:e}".format(p_value), "max_time": max_time}
-        else:
-            return None
-
-    result_list = []
-
-    # 设置线程池的大小，可以根据需要进行调整
-    max_workers = 4
-
-    # 使用ThreadPoolExecutor来并行处理for循环
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(process_result, i) for i in range(len(result))]
-
-        # 使用tqdm显示进度条
-        for future in tqdm(futures, total=len(result), desc="Processing"):
-            result_item = future.result()
-            if result_item is not None:
-                result_list.append(result_item)
-
-
 
 
     response ={

@@ -15,9 +15,9 @@ from web_tool import models
 from operator import itemgetter
 from django.db.models import Q
 #my function 
-from crawler import crawler
-from plot import plot
-from plot2 import plot2
+from function_list.crawler import crawler
+from function_list.plot import plot
+from function_list.plot2 import plot2
 from django.db.models import Q
 
 

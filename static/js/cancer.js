@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //計時器的部份
     const spinnerContainer = document.getElementById('spinner-container');//
     const timerElement = document.getElementById('timer');//
-    let timerValue = 0;//
+    var timerValue = 0;//
     let timerInterval;//
   
     function updateTimerAndSpinner() {//
@@ -105,9 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
             var survival_input_high = $("#survival_input_high").val();
             var survival_input_days = $("#survival_input_days").val();
             var stage = $("#survival_select").val();
-
+            clearInterval(timerInterval);//
             spinnerContainer.style.display = 'flex';//
-                  // 启动计时器（每秒更新一次）
+            // 启动计时器（每秒更新一次）
             timerInterval = setInterval(updateTimerAndSpinner, 1000);//
         $.ajax({
             type: 'POST',

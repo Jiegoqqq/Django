@@ -9,5 +9,7 @@ urlpatterns = [
     path('cancer_screener_web/', views.cancer_screener_web),
     path('cancer_screener_data/', views.cancer_screener_data),
     re_path(r'cancer_web/(?P<id>.+)',views.cancer_web),
+    path('liver_screener_web/', views.liver_screener_web),
+    path('liver_screener_data/', views.liver_screener_data),
 
 ]

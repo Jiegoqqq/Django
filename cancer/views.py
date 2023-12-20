@@ -27,7 +27,7 @@ import mysql.connector
 from tqdm import tqdm
 from multiprocessing import Pool
 from function_list.pvalue import PValue
-
+import math 
 def cancer_web(request,id):
     return render(request, 'cancer.html', locals())
 
@@ -255,5 +255,85 @@ def cancer_screener_data(request):
 
     response ={
         'result_list':result_list,
+     }
+    return JsonResponse(response)
+
+@csrf_exempt  
+def liver_screener_web(request):
+    return render(request, 'liver_screener.html', locals())
+
+@csrf_exempt  
+def liver_screener_data(request):
+    cancer_kind = request.POST['cancer_kind']
+    select_cancer = request.POST['select_cancer']
+    select_conditon2_Value = request.POST['select_conditon2_Value']
+    select_conditon1_Value = request.POST['select_conditon1_Value']
+    select_type1_Value = request.POST['select_type1_Value']
+    type1_input = request.POST['type1_input']
+    select_test_Value = request.POST['select_test_Value']
+    select_type2_Value = request.POST['select_type2_Value']
+    qvalue_input = request.POST['qvalue_input']
+
+    type1_input = math.log2(float(type1_input))
+
+    def filter_and_transform_result_gt(result, filter_field, qvalue_input):
+        result = result.filter(log2_fold_change_field__gte=type1_input)
+        result = result.filter(**{filter_field + "__lte": float(qvalue_input)})
+
+        table_list = []
+        for row in result:
+            table_list.append({
+                'gene': row.gene,
+                'value_1': row.value_1,
+                'value_2': row.value_2,
+                'fold_change': round(2 ** float(row.log2_fold_change_field), 3),
+                'q_value': getattr(row, filter_field),
+            })
+        return table_list
+    def filter_and_transform_result_lt(result, filter_field, qvalue_input):
+        result = result.filter(log2_fold_change_field__lte=type1_input)
+
+        result = result.filter(**{filter_field + "__gte": qvalue_input})
+        table_list = []
+        for row in result:
+            table_list.append({
+                'gene': row.gene,
+                'value_1': row.value_1,
+                'value_2': row.value_2,
+                'fold_change': round(2 ** float(row.log2_fold_change_field), 3),
+                'q_value': getattr(row, filter_field),
+            })
+        return table_list
+    
+    if 'DE Gene' in cancer_kind :
+        if select_conditon1_Value == 'N' :
+            class_name = f'TcgaLihcN{select_conditon2_Value}Genes'
+            model_class = getattr(models, class_name, None)
+            result = model_class.objects.all() if model_class else []
+        else:
+            class_name = f'TcgaLihc{select_conditon1_Value}{select_conditon2_Value}Genes'
+            model_class = getattr(models, class_name, None)
+            result = model_class.objects.all() if model_class else []
+    if select_type1_Value == 'bigthan':
+        if select_test_Value == 'Utest':
+            table_list = filter_and_transform_result_gt(result, 'u_test_greater', qvalue_input)
+        elif select_test_Value == 'Ttest':
+            table_list = filter_and_transform_result_gt(result, 't_test_greater', qvalue_input)
+
+        elif select_test_Value == 'KStest':
+            result = result.filter(log2_fold_change_field__gte=type1_input)
+            result = result.filter(ks_test_greater__gte=qvalue_input)   
+            table_list = filter_and_transform_result_gt(result, 'ks_test_greater', qvalue_input)         
+    else:
+        if select_test_Value == 'Utest':
+            table_list = filter_and_transform_result_lt(result, 'u_test_less', qvalue_input)
+        elif select_test_Value == 'Ttest':
+            table_list = filter_and_transform_result_lt(result, 't_test_less', qvalue_input)
+        elif select_test_Value == 'KStest':
+            table_list = filter_and_transform_result_lt(result, 'ks_test_less', qvalue_input)
+
+ 
+    response ={
+        'table_list':table_list,
      }
     return JsonResponse(response)

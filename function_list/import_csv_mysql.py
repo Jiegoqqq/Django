@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine, VARCHAR
-
+from sqlalchemy import Float
 
 # def csv2mysql(df, table_name):
 #     # Create a connection to the MySQL database
@@ -36,11 +36,22 @@ from sqlalchemy import create_engine, VARCHAR
 def modify_data_types(df):
     data_types = {}  # Create an empty dictionary to store data types
 
-    # Determine the maximum length for each column
-    for column_name in df.columns:
-        max_length = df[column_name].astype(str).str.len().max()
-        data_types[column_name] = VARCHAR(max_length)
+    # # Determine the maximum length for each column
+    # for column_name in df.columns:
+    #     max_length = df[column_name].astype(str).str.len().max()
+    #     data_types[column_name] = VARCHAR(max_length)
 
+    data_types = {}  # Create an empty dictionary to store data types
+
+    # Determine the data type for each column
+    for column_name in df.columns:
+        if pd.api.types.is_numeric_dtype(df[column_name]):
+            # If the column is numeric, set its data type to Float
+            data_types[column_name] = Float()
+        else:
+            # If the column is not numeric, set its data type based on the maximum length
+            max_length = df[column_name].astype(str).str.len().max()
+            data_types[column_name] = VARCHAR(max_length)
     return data_types
 
 def csv2mysql(df, table_name):
@@ -53,8 +64,9 @@ def csv2mysql(df, table_name):
     # Insert the DataFrame into the MySQL table with the specified data types
     df.to_sql(table_name, con=engine, if_exists='replace', index=False, dtype=data_types)
 
-# Read the CSV file, specifying the first row as column names
-df = pd.read_csv('/home/cosbi/Downloads/Lbarbarum_table.csv', header=0)
 
-# Call the function to insert the DataFrame into the MySQL table with the specified data types
-csv2mysql(df, 'Lbarbarum')
+# Read the CSV file, specifying the first row as column names
+df = pd.read_csv('/home/cosbi/Downloads/DE_gene_data/TCGA-LIHC_N_4_genes.csv', header=0)
+
+
+csv2mysql(df, 'TCGA-LIHC_N_4_genes')

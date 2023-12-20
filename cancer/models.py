@@ -18,6 +18,32 @@ class Gene(models.Model):
         db_table = 'Gene'
 
 
+class Lbarbarum(models.Model):
+    library_name = models.CharField(db_column='Library Name', max_length=9, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    gene_id = models.CharField(db_column='Gene ID', primary_key=True, max_length=13)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    gene_location = models.CharField(db_column='Gene location', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    gene_expression = models.CharField(db_column='Gene expression', max_length=13, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    accession_number_best_hits_in_the_genbank_field = models.CharField(db_column='Accession number (Best hits in the GenBank)', max_length=14, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    annotation = models.CharField(db_column='Annotation', max_length=263, blank=True, null=True)  # Field name made lowercase.
+    species = models.CharField(db_column='Species', max_length=41, blank=True, null=True)  # Field name made lowercase.
+    blast_score = models.CharField(db_column='Blast Score', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    expect_value = models.CharField(db_column='Expect value', max_length=15, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    identities = models.CharField(db_column='Identities', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    frame = models.CharField(db_column='Frame', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    kegg_pathway = models.CharField(db_column='KEGG pathway', max_length=23, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    go_term = models.CharField(db_column='GO Term', max_length=10, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    interpro = models.CharField(db_column='Interpro', max_length=11, blank=True, null=True)  # Field name made lowercase.
+    pfam = models.CharField(db_column='Pfam', max_length=12, blank=True, null=True)  # Field name made lowercase.
+    swissprot = models.CharField(db_column='Swissprot', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    trembl = models.CharField(db_column='TrEMBL', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    tf_ath = models.CharField(db_column='TF_ath', max_length=6, blank=True, null=True)  # Field name made lowercase.
+    tf_osa = models.CharField(db_column='TF_osa', max_length=6, blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Lbarbarum'
+
+
 class Srr3882728HybRnaupRnaupMirandaMirandaMutation(models.Model):
     clashread = models.CharField(db_column='CLASHRead', primary_key=True, max_length=41)  # Field name made lowercase.
     readcount = models.CharField(max_length=9, blank=True, null=True)
@@ -51,6 +77,606 @@ class Srr3882728HybRnaupRnaupMirandaMirandaMutation(models.Model):
     class Meta:
         managed = False
         db_table = 'SRR3882728_hyb_RNAup_RNAup_miranda_miranda_mutation'
+
+
+class TcgaLihc12Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_1_2_genes'
+
+
+class TcgaLihc13Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_1_3_genes'
+
+
+class TcgaLihc14Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_1_4_genes'
+
+
+class TcgaLihc1NGenes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_1_N_genes'
+
+
+class TcgaLihc21Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_2_1_genes'
+
+
+class TcgaLihc23Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_2_3_genes'
+
+
+class TcgaLihc24Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_2_4_genes'
+
+
+class TcgaLihc2NGenes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=34, blank=True, null=True)
+    gene = models.CharField(max_length=34, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_2_N_genes'
+
+
+class TcgaLihc31Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_3_1_genes'
+
+
+class TcgaLihc32Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=6, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_3_2_genes'
+
+
+class TcgaLihc34Genes(models.Model): #有問題
+    a1bg = models.CharField(db_column='A1BG', primary_key=True, max_length=22)  # Field name made lowercase.
+    a1bg_1 = models.CharField(db_column='A1BG.1', max_length=55, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    a1bg_2 = models.CharField(db_column='A1BG.2', max_length=55, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    chr19_58346805_58362848 = models.CharField(db_column='chr19:58346805-58362848', max_length=39, blank=True, null=True)  # Field renamed to remove unsuitable characters.
+    q1 = models.CharField(max_length=2, blank=True, null=True)
+    q2 = models.CharField(max_length=2, blank=True, null=True)
+    ok = models.CharField(db_column='OK', max_length=7, blank=True, null=True)  # Field name made lowercase.
+    number_794_346 = models.FloatField(db_column='794.346', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_631_806 = models.FloatField(db_column='631.806', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    field_0_330285 = models.FloatField(db_column='-0.330285', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    field_0_0538527 = models.FloatField(db_column='-0.0538527', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it started with '_'.
+    number_0_71395 = models.FloatField(db_column='0.71395', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_1 = models.FloatField(db_column='1', blank=True, null=True)  # Field renamed because it wasn't a valid Python identifier.
+    no = models.CharField(max_length=3, blank=True, null=True)
+    number_1_0 = models.FloatField(db_column='1.0', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_1_0_1 = models.FloatField(db_column='1.0.1', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_1_0_2 = models.FloatField(db_column='1.0.2', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_0_8570555695370959 = models.FloatField(db_column='0.8570555695370959', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_1_0_3 = models.FloatField(db_column='1.0.3', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_0_5546627364170922 = models.FloatField(db_column='0.5546627364170922', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_1_0_4 = models.FloatField(db_column='1.0.4', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_0_9379101426563752 = models.FloatField(db_column='0.9379101426563752', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+    number_0_9220258508665213 = models.FloatField(db_column='0.9220258508665213', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it wasn't a valid Python identifier.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_3_4_genes'
+
+
+class TcgaLihc3NGenes(models.Model):
+    test_id = models.CharField(max_length=22, blank=True, null=True)
+    gene_id = models.CharField(max_length=34, blank=True, null=True)
+    gene = models.CharField(max_length=34, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_3_N_genes'
+
+
+class TcgaLihc41Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_4_1_genes'
+
+
+class TcgaLihc42Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_4_2_genes'
+
+
+class TcgaLihc43Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_4_3_genes'
+
+
+class TcgaLihc4NGenes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=34, blank=True, null=True)
+    gene = models.CharField(max_length=34, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_4_N_genes'
+
+
+class TcgaLihcN1Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_N_1_genes'
+
+
+class TcgaLihcN2Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_N_2_genes'
+
+
+class TcgaLihcN3Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_N_3_genes'
+
+
+class TcgaLihcN4Genes(models.Model):
+    test_id = models.CharField(primary_key=True, max_length=22)
+    gene_id = models.CharField(max_length=55, blank=True, null=True)
+    gene = models.CharField(max_length=55, blank=True, null=True)
+    locus = models.CharField(max_length=39, blank=True, null=True)
+    sample_1 = models.CharField(max_length=2, blank=True, null=True)
+    sample_2 = models.CharField(max_length=2, blank=True, null=True)
+    status = models.CharField(max_length=7, blank=True, null=True)
+    value_1 = models.FloatField(blank=True, null=True)
+    value_2 = models.FloatField(blank=True, null=True)
+    log2_fold_change_field = models.FloatField(db_column='log2(fold_change)', blank=True, null=True)  # Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
+    test_stat = models.FloatField(blank=True, null=True)
+    p_value = models.FloatField(blank=True, null=True)
+    q_value = models.FloatField(blank=True, null=True)
+    significant = models.CharField(max_length=3, blank=True, null=True)
+    ks_test_twosided = models.FloatField(db_column='KS_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    ks_test_greater = models.FloatField(db_column='KS_test_greater', blank=True, null=True)  # Field name made lowercase.
+    ks_test_less = models.FloatField(db_column='KS_test_less', blank=True, null=True)  # Field name made lowercase.
+    t_test_twosided = models.FloatField(db_column='T_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    t_test_greater = models.FloatField(db_column='T_test_greater', blank=True, null=True)  # Field name made lowercase.
+    t_test_less = models.FloatField(db_column='T_test_less', blank=True, null=True)  # Field name made lowercase.
+    u_test_twosided = models.FloatField(db_column='U_test_twosided', blank=True, null=True)  # Field name made lowercase.
+    u_test_greater = models.FloatField(db_column='U_test_greater', blank=True, null=True)  # Field name made lowercase.
+    u_test_less = models.FloatField(db_column='U_test_less', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'TCGA-LIHC_N_4_genes'
 
 
 class TcgaAccGenesFpkmCufflinks(models.Model):
